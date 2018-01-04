@@ -374,6 +374,17 @@ namespace TweetTest.Controllers
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);
                     if (result.Succeeded)
                     {
+                        //追記スタート
+                        //コピペ元:http://blog.nakajix.jp/entry/2014/09/12/074000
+                        // ユーザ情報の登録が完了してから、AccessTokenとAccessTokenSecretを永続化する
+                        var claimsIdentity = await AuthenticationManager.GetExternalIdentityAsync(DefaultAuthenticationTypes.ExternalCookie);
+                        var claims = claimsIdentity.Claims;
+                        foreach (var claim in claims)
+                        {
+                            if ((claim.Type == "ExternalAccessToken") || (claim.Type == "ExternalAccessTokenSecret"))
+                                await UserManager.AddClaimAsync(user.Id, claim);
+                        }
+                        // ここまで
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                         return RedirectToLocal(returnUrl);
                     }

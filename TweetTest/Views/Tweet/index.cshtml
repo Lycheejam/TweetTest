@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "index";
+}
+
+<h2>ツイート画面</h2>
+
+<form action="/Tweet/TweetPost" method="post">
+    <div class="control-group">
+        <p><label class="control-label" for="tweet">ツイート画面</label></p>
+        <div class="controls">
+            <p><input class="text-box single-line" id="TweetText" name="TweetText" type="text" value="" /></p><br>
+            <p><span class="field-validation-valid help-inline" data-valmsg-for="tweet" data-valmsg-replace="true"></span>
+        </div>
+    </div>
+    <div class="form-actions no-color">
+        <input type="submit" value="ツイート" class="btn" />
+    </div>
+</form>
