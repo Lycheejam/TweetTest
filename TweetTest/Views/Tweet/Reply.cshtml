@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Reply";
+}
+@model TweetTest.Models.TweetResult
+<h2>Reply</h2>
+<p>返信先</p><br>
+<p>@Model.tweet</p><br><br>
+
+<p>返信内容</p>
+<form action="/Tweet/Reply" method="post">
+    <div class="control-group">
+        <p><label class="control-label" for="tweet">返信画面</label></p>
+        <div class="controls">
+            <p><input class="text-box single-line" id="TweetText" name="TweetText" type="text" value="" /></p><br>
+            <p><input  id="replyId" name="replyId" type="hidden" value=@Model.tweetId /></p><br>
+            <p><span class="field-validation-valid help-inline" data-valmsg-for="tweet" data-valmsg-replace="true"></span>
+        </div>
+    </div>
+    <div class="form-actions no-color">
+        <input type="submit" value="ツイート" class="btn" />
+    </div>
+</form>

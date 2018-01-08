@@ -58,7 +58,7 @@ namespace TweetTest
             //   consumerSecret: "");
 
             var options = new TwitterAuthenticationOptions();
-            options.ConsumerKey = "API-Key";
+            options.ConsumerKey = "API-Kwy";
             options.ConsumerSecret = "API-Secret";
             options.BackchannelCertificateValidator = new CertificateSubjectKeyIdentifierValidator(new[]{
                 "A5EF0B11CEC04103A34A659048B21CE0572D7D47", // VeriSign Class 3 Secure Server CA - G2

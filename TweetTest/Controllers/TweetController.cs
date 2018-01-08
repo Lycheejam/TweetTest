@@ -50,9 +50,9 @@ namespace TweetTest.Controllers
 
             var tr = new TweetResult
             {
-                id = 1,
+                userId = User.Identity.GetUserId(),
                 tweet = res.Text,
-                tweetId = res.Id.ToString()
+                tweetId = res.Id
             };
 
             db.TweetResults.Add(tr);
@@ -64,6 +64,51 @@ namespace TweetTest.Controllers
         {
             var tr = db.TweetResults.ToList();
             return View(tr);
+        }
+
+        public ActionResult Reply(int? id)
+        {
+            TweetResult tr = db.TweetResults.Find(id);
+            return View(tr);
+        }
+        [HttpPost]
+        public async Task<ActionResult> Reply(string TweetText, long replyId)
+        {
+            //コピペ AccessToken&Secretをテーブルから参照する。
+            //コピペ元 » ASP.NET Identity：Twitter認証時の情報でツイートする方法 - なか日記 
+            // http://blog.nakajix.jp/entry/2014/09/12/074000
+            var usermgr = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var claims = await usermgr.GetClaimsAsync(User.Identity.GetUserId());
+
+            string accessToken = "", accessTokenSecret = "";
+
+            var firstOrDefault = claims.FirstOrDefault(x => x.Type == "ExternalAccessToken");
+            if (firstOrDefault != null) // TokenとTokenSecretはペアで登録されるのでnullチェックは片方のみ行う
+            {
+                accessToken = firstOrDefault.Value;
+                accessTokenSecret = claims.FirstOrDefault(x => x.Type == "ExternalAccessTokenSecret").Value;
+            }
+            //コピペここまで
+
+            var tokens = CoreTweet.Tokens.Create("API-Key"
+                                               , "API-Secret"
+                                               , accessToken    //テーブルから参照
+                                               , accessTokenSecret);    //テーブルから参照
+            //ツイート後、レスポンス取得
+            var res = tokens.Statuses.Update(status => DateTime.Now + " " + TweetText
+                                            , in_reply_to_status_id => replyId);
+            Debug.Print(res.Text);
+
+            var tr = new TweetResult
+            {
+                userId = User.Identity.GetUserId(),
+                tweet = res.Text,
+                tweetId = res.Id
+            };
+
+            db.TweetResults.Add(tr);
+            db.SaveChanges();
+            return RedirectToAction("TweetPost");
         }
     }
 }
