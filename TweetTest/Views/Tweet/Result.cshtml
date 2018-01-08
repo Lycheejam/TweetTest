@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Result";
+}
+@model IEnumerable<TweetTest.Models.TweetResult>
+<h2>Result</h2>
+
+<h3>一覧</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>text</th>
+            <th>tweetid</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.id</td>
+                <td>@item.tweet</td>
+                <td>@item.tweetId</td>
+            </tr>
+        }
+    </tbody>
+
+</table>

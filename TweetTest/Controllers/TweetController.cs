@@ -13,7 +13,8 @@ namespace TweetTest.Controllers
 {
     public class TweetController : Controller
     {
-        //private 
+        private MyContext db = new MyContext();
+
         // GET: Tweet
         public ActionResult Index()
         {
@@ -40,13 +41,29 @@ namespace TweetTest.Controllers
             //コピペここまで
 
             var tokens = CoreTweet.Tokens.Create("API-Key"
-                                               , "API-Key"
+                                               , "API-Secret"
                                                , accessToken    //テーブルから参照
                                                , accessTokenSecret);    //テーブルから参照
             //ツイート後、レスポンス取得
             var res = tokens.Statuses.Update(status => DateTime.Now + " " + tt.TweetText);
             Debug.Print(res.Text);
+
+            var tr = new TweetResult
+            {
+                id = 1,
+                tweet = res.Text,
+                tweetId = res.Id.ToString()
+            };
+
+            db.TweetResults.Add(tr);
+            db.SaveChanges();
+
             return View(res);
+        }
+        public ActionResult Result()
+        {
+            var tr = db.TweetResults.ToList();
+            return View(tr);
         }
     }
 }
