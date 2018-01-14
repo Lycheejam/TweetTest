@@ -9,6 +9,7 @@ using TweetTest.Models;
 using Microsoft.Owin.Security.Twitter;
 using Microsoft.Owin.Security;
 using System.Security.Claims;
+using static TweetTest.Models.ReadToken;
 
 namespace TweetTest
 {
@@ -57,9 +58,12 @@ namespace TweetTest
             //   consumerKey: "",
             //   consumerSecret: "");
 
+
+            var keys = MyTokens;
+
             var options = new TwitterAuthenticationOptions();
-            options.ConsumerKey = "API-Kwy";
-            options.ConsumerSecret = "API-Secret";
+            options.ConsumerKey = keys.ConsumerKey;
+            options.ConsumerSecret = keys.ConsumerSecret;
             options.BackchannelCertificateValidator = new CertificateSubjectKeyIdentifierValidator(new[]{
                 "A5EF0B11CEC04103A34A659048B21CE0572D7D47", // VeriSign Class 3 Secure Server CA - G2
                 "0D445C165344C1827E1D20AB25F40163D8BE79A5", // VeriSign Class 3 Secure Server CA - G3

@@ -1,0 +1,4 @@
+﻿{
+  "ConsumerKey": "API-Key",
+  "ConsumerSecret": "API-Secret ファイル名を 'keys_SAMPLE.json' から 'keys.json'変更する"
+}

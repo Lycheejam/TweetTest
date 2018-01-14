@@ -1,16 +1,16 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using CoreTweet;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using TweetTest.Models;
+using static TweetTest.Models.ReadToken;
 
-namespace TweetTest.Controllers
-{
+namespace TweetTest.Controllers {
     public class TweetController : Controller
     {
         private MyContext db = new MyContext();
@@ -40,8 +40,10 @@ namespace TweetTest.Controllers
             }
             //コピペここまで
 
-            var tokens = CoreTweet.Tokens.Create("API-Key"
-                                               , "API-Secret"
+            var keys = MyTokens;
+
+            var tokens = CoreTweet.Tokens.Create(keys.ConsumerKey
+                                               , keys.ConsumerSecret
                                                , accessToken    //テーブルから参照
                                                , accessTokenSecret);    //テーブルから参照
             //ツイート後、レスポンス取得
@@ -90,8 +92,10 @@ namespace TweetTest.Controllers
             }
             //コピペここまで
 
-            var tokens = CoreTweet.Tokens.Create("API-Key"
-                                               , "API-Secret"
+            var keys = MyTokens;
+
+            var tokens = CoreTweet.Tokens.Create(keys.ConsumerKey
+                                               , keys.ConsumerSecret
                                                , accessToken    //テーブルから参照
                                                , accessTokenSecret);    //テーブルから参照
             //ツイート後、レスポンス取得

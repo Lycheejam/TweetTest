@@ -182,6 +182,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ReadToken.cs" />
     <Compile Include="Models\TweetResult.cs" />
     <Compile Include="Models\TweetViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -196,6 +197,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="App_Data\keys_SAMPLE.json" />
+    <Content Include="App_Data\keys.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -247,9 +250,7 @@
     <Content Include="Views\Tweet\Result.cshtml" />
     <Content Include="Views\Tweet\Reply.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
