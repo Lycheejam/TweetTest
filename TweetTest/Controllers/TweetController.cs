@@ -60,7 +60,7 @@ namespace TweetTest.Controllers {
             db.TweetResults.Add(tr);
             db.SaveChanges();
 
-            return View(res);
+            return View(tr);
         }
         public ActionResult Result()
         {
@@ -112,7 +112,7 @@ namespace TweetTest.Controllers {
 
             db.TweetResults.Add(tr);
             db.SaveChanges();
-            return RedirectToAction("TweetPost");
+            return View("TweetPost", tr);
         }
     }
 }
