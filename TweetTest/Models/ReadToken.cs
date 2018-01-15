@@ -1,9 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Web;
 
 namespace TweetTest.Models {
     public class ReadToken {
@@ -23,6 +19,7 @@ namespace TweetTest.Models {
         /// </summary>
         private static Keys ReadTokens() {
             var json = File.ReadAllText(@"..\..\..\TweetTest\App_Data\keys.json");
+            
             return JsonConvert.DeserializeObject<Keys>(json);
         }
 
