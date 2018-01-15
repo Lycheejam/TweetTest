@@ -29,9 +29,10 @@ namespace TweetTest.Controllers {
             // http://blog.nakajix.jp/entry/2014/09/12/074000
             var usermgr = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var claims = await usermgr.GetClaimsAsync(User.Identity.GetUserId());
+            
 
             string accessToken = "", accessTokenSecret = "";
-
+            
             var firstOrDefault = claims.FirstOrDefault(x => x.Type == "ExternalAccessToken");
             if (firstOrDefault != null) // TokenとTokenSecretはペアで登録されるのでnullチェックは片方のみ行う
             {
@@ -76,6 +77,7 @@ namespace TweetTest.Controllers {
         [HttpPost]
         public async Task<ActionResult> Reply(string TweetText, long replyId)
         {
+            //ここを共通化したいんだけどどうすんだ
             //コピペ AccessToken&Secretをテーブルから参照する。
             //コピペ元 » ASP.NET Identity：Twitter認証時の情報でツイートする方法 - なか日記 
             // http://blog.nakajix.jp/entry/2014/09/12/074000
