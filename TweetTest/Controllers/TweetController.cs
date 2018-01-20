@@ -96,7 +96,6 @@ namespace TweetTest.Controllers {
                                                , keys.ConsumerSecret
                                                , claimkeys.accessToken    //テーブルから参照
                                                , claimkeys.accessTokenSecret);    //テーブルから参照
-            //コピペここまで
             return tokens;
         }
     }
