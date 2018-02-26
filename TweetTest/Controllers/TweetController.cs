@@ -29,7 +29,11 @@ namespace TweetTest.Controllers {
 
             var tr = new TweetResult {
                 userId = User.Identity.GetUserId(),
-                tweet = res.Text,
+                Task1 = tt.Task1,
+                Task2 = tt.Task2,
+                Task3 = tt.Task3,
+                Task4 = tt.Task4,
+                Task5 = tt.Task5,
                 tweetId = res.Id
             };
 
@@ -48,17 +52,21 @@ namespace TweetTest.Controllers {
             return View(tr);
         }
         [HttpPost]
-        public async Task<ActionResult> Reply(string TweetText, long replyId) {
+        public async Task<ActionResult> Reply(TaskResult tresult) {
             //ツイート用トークン生成
             var tokens = await CreateTokens();
             //ツイート後、レスポンス取得
-            var res = tokens.Statuses.Update(status => DateTime.Now + " " + TweetText
-                                            , in_reply_to_status_id => replyId);
+            var res = tokens.Statuses.Update(status => TaskModels.UpdateTasks(tresult)
+                                            , in_reply_to_status_id => tresult.replyid);
             Debug.Print(res.Text);
 
             var tr = new TweetResult {
                 userId = User.Identity.GetUserId(),
-                tweet = res.Text,
+                Task1 = tresult.Task1,
+                Task2 = tresult.Task2,
+                Task3 = tresult.Task3,
+                Task4 = tresult.Task4,
+                Task5 = tresult.Task5,
                 tweetId = res.Id
             };
 

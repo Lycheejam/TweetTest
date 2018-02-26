@@ -186,7 +186,6 @@
     <Compile Include="Models\ReadToken.cs" />
     <Compile Include="Models\TaskModels.cs" />
     <Compile Include="Models\TweetResult.cs" />
-    <Compile Include="Models\TweetViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

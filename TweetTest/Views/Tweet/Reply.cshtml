@@ -4,8 +4,6 @@
 }
 @model TweetTest.Models.TweetResult
 <h2>Reply</h2>
-<p>返信先</p><br>
-<p>@Model.tweet</p><br><br>
 
 <p>返信内容</p>
 <form action="/Tweet/Reply" method="post">
@@ -18,7 +16,7 @@
                     <option value="2">○</option>
                     <option value="3">×</option>
                 </select>
-                <input class="text-box single-line" id="task1" name="task1" type="text" value="" />
+                <input class="text-box single-line" id="task1" name="task1" type="text" value=@Model.Task1 />
             </p><br>
             <p>
                 <select name="task2chk">
@@ -26,7 +24,7 @@
                     <option value="2">○</option>
                     <option value="3">×</option>
                 </select>
-                <input class="text-box single-line" id="task2" name="task2" type="text" value="" />
+                <input class="text-box single-line" id="task2" name="task2" type="text" value=@Model.Task2 />
             </p><br>
             <p>
                 <select name="task3chk">
@@ -34,7 +32,7 @@
                     <option value="2">○</option>
                     <option value="3">×</option>
                 </select>
-                <input class="text-box single-line" id="task3" name="task3" type="text" value="" />
+                <input class="text-box single-line" id="task3" name="task3" type="text" value=@Model.Task3 />
             </p><br>
             <p>
                 <select name="task4chk">
@@ -42,7 +40,7 @@
                     <option value="2">○</option>
                     <option value="3">×</option>
                 </select>
-                <input class="text-box single-line" id="task4" name="task4" type="text" value="" />
+                <input class="text-box single-line" id="task4" name="task4" type="text" value=@Model.Task4 />
             </p><br>
             <p>
                 <select name="task5chk">
@@ -50,7 +48,7 @@
                     <option value="2">○</option>
                     <option value="3">×</option>
                 </select>
-                <input class="text-box single-line" id="task5" name="task5" type="text" value="" />
+                <input class="text-box single-line" id="task5" name="task5" type="text" value=@Model.Task5 />
             </p><br>
             <p><input id="replyId" name="replyId" type="hidden" value=@Model.tweetId /></p><br>
             <p><span class="field-validation-valid help-inline" data-valmsg-for="tweet" data-valmsg-replace="true"></span>
