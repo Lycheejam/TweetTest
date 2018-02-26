@@ -22,8 +22,9 @@ namespace TweetTest.Controllers {
         //テーブルを参照する際、awaitを使用しているのでasyncに変更？
         public async Task<ActionResult> TweetPost(TweetViewModels tt) {
             var tokens = await CreateTokens();
+            
             //ツイート後、レスポンス取得
-            var res = tokens.Statuses.Update(status => DateTime.Now + " " + tt.TweetText);
+            var res = tokens.Statuses.Update(status => TaskModels.CreateTasks(tt));
             Debug.Print(res.Text);
 
             var tr = new TweetResult {
