@@ -16,20 +16,19 @@ namespace TweetTest.Models
         public string userId { get; set; }
         public long tweetId { get; set; }
     }
-    public class TweetViewModels {
+    public class TweetViewModels : TaskResult{
         public string Task1 { get; set; }
         public string Task2 { get; set; }
         public string Task3 { get; set; }
         public string Task4 { get; set; }
         public string Task5 { get; set; }
     }
-    public class TaskResult : TweetViewModels {
+    public class TaskResult {
         public int Task1chk { get; set; }
         public int Task2chk { get; set; }
         public int Task3chk { get; set; }
         public int Task4chk { get; set; }
         public int Task5chk { get; set; }
-        public long replyid { get; set; }
     }
 
 }

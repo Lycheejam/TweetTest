@@ -42,31 +42,44 @@ namespace TweetTest.Controllers {
 
             return View(tr);
         }
+        //これ使わずに最新タスクだけ見れればいいんだよね？
         public ActionResult Result() {
             var tr = db.TweetResults.ToList();
             return View(tr);
         }
 
-        public ActionResult Reply(int? id) {
-            TweetResult tr = db.TweetResults.Find(id);
+        //public ActionResult Reply(int? id) {
+        //    TweetResult tr = db.TweetResults.Find(id);
+        //    return View(tr);
+        //}
+        public ActionResult Reply() {
+            //var tr = db.TweetResults.Last();
+            var maxid = db.TweetResults.Max(x => x.userId);
+            TweetResult tr = db.TweetResults.SingleOrDefault(x => x.userId == maxid);
             return View(tr);
         }
+
         [HttpPost]
-        public async Task<ActionResult> Reply(TaskResult tresult) {
+        public async Task<ActionResult> TweetUpdate(TweetResult tresult) {
             //ツイート用トークン生成
             var tokens = await CreateTokens();
             //ツイート後、レスポンス取得
             var res = tokens.Statuses.Update(status => TaskModels.UpdateTasks(tresult)
-                                            , in_reply_to_status_id => tresult.replyid);
+                                            , in_reply_to_status_id => tresult.tweetId);
             Debug.Print(res.Text);
 
             var tr = new TweetResult {
                 userId = User.Identity.GetUserId(),
                 Task1 = tresult.Task1,
+                Task1chk = tresult.Task1chk,
                 Task2 = tresult.Task2,
+                Task2chk = tresult.Task2chk,
                 Task3 = tresult.Task3,
+                Task3chk = tresult.Task3chk,
                 Task4 = tresult.Task4,
+                Task4chk = tresult.Task4chk,
                 Task5 = tresult.Task5,
+                Task5chk = tresult.Task5chk,
                 tweetId = res.Id
             };
 
