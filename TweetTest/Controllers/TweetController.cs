@@ -42,20 +42,12 @@ namespace TweetTest.Controllers {
 
             return View(tr);
         }
-        //これ使わずに最新タスクだけ見れればいいんだよね？
-        public ActionResult Result() {
-            var tr = db.TweetResults.ToList();
-            return View(tr);
-        }
 
-        //public ActionResult Reply(int? id) {
-        //    TweetResult tr = db.TweetResults.Find(id);
-        //    return View(tr);
-        //}
         public ActionResult Reply() {
-            //var tr = db.TweetResults.Last();
-            var maxid = db.TweetResults.Max(x => x.userId);
-            TweetResult tr = db.TweetResults.SingleOrDefault(x => x.userId == maxid);
+            //IDの最大値を取得
+            //これ複数のuserの場合どうなる？他のユーザーのID取得してしまうんでない？
+            var maxid = db.TweetResults.Max(x => x.id);
+            TweetResult tr = db.TweetResults.SingleOrDefault(x => x.id == maxid);
             return View(tr);
         }
 
@@ -66,8 +58,7 @@ namespace TweetTest.Controllers {
             //ツイート後、レスポンス取得
             var res = tokens.Statuses.Update(status => TaskModels.UpdateTasks(tresult)
                                             , in_reply_to_status_id => tresult.tweetId);
-            Debug.Print(res.Text);
-
+            //ここメソッド化できる？
             var tr = new TweetResult {
                 userId = User.Identity.GetUserId(),
                 Task1 = tresult.Task1,
@@ -115,9 +106,9 @@ namespace TweetTest.Controllers {
 
             //ツイート用トークン生成
             var tokens = Tokens.Create(keys.ConsumerKey
-                                               , keys.ConsumerSecret
-                                               , claimkeys.accessToken    //テーブルから参照
-                                               , claimkeys.accessTokenSecret);    //テーブルから参照
+                                     , keys.ConsumerSecret
+                                     , claimkeys.accessToken    //テーブルから参照
+                                     , claimkeys.accessTokenSecret);    //テーブルから参照
             return tokens;
         }
     }
