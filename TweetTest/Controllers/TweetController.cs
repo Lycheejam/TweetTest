@@ -1,7 +1,6 @@
 ﻿using CoreTweet;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,7 +19,7 @@ namespace TweetTest.Controllers {
         }
 
         //テーブルを参照する際、awaitを使用しているのでasyncに変更？
-        public async Task<ActionResult> TweetPost(TweetViewModels tt) {
+        public async Task<ActionResult> TweetPost(TweetResult tt) {
             var tokens = await CreateTokens();
             
             //ツイート後、レスポンス取得
@@ -29,11 +28,7 @@ namespace TweetTest.Controllers {
 
             var tr = new TweetResult {
                 userId = User.Identity.GetUserId(),
-                Task1 = tt.Task1,
-                Task2 = tt.Task2,
-                Task3 = tt.Task3,
-                Task4 = tt.Task4,
-                Task5 = tt.Task5,
+                myTasks = tt.myTasks,
                 tweetId = res.Id
             };
 
@@ -61,16 +56,7 @@ namespace TweetTest.Controllers {
             //ここメソッド化できる？
             var tr = new TweetResult {
                 userId = User.Identity.GetUserId(),
-                Task1 = tresult.Task1,
-                Task1chk = tresult.Task1chk,
-                Task2 = tresult.Task2,
-                Task2chk = tresult.Task2chk,
-                Task3 = tresult.Task3,
-                Task3chk = tresult.Task3chk,
-                Task4 = tresult.Task4,
-                Task4chk = tresult.Task4chk,
-                Task5 = tresult.Task5,
-                Task5chk = tresult.Task5chk,
+                myTasks = tresult.myTasks,
                 tweetId = res.Id
             };
 

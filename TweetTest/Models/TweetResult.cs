@@ -10,25 +10,16 @@ namespace TweetTest.Models
         public DbSet<TweetResult> TweetResults { get; set; }
     }
 
-    public class TweetResult : TweetViewModels
+    public class TweetResult
     {
         public int id { get; set; }
         public string userId { get; set; }
         public long tweetId { get; set; }
+        public List<MyTask> myTasks { get; set; }
     }
-    public class TweetViewModels : TaskResult{
-        public string Task1 { get; set; }
-        public string Task2 { get; set; }
-        public string Task3 { get; set; }
-        public string Task4 { get; set; }
-        public string Task5 { get; set; }
+    public class MyTask {
+        public int id { get; set; }
+        public string myTask { get; set; }
+        public int state { get; set; }
     }
-    public class TaskResult {
-        public int Task1chk { get; set; }
-        public int Task2chk { get; set; }
-        public int Task3chk { get; set; }
-        public int Task4chk { get; set; }
-        public int Task5chk { get; set; }
-    }
-
 }
