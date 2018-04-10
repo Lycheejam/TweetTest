@@ -21,7 +21,10 @@ namespace TweetTest.Controllers {
         //テーブルを参照する際、awaitを使用しているのでasyncに変更？
         public async Task<ActionResult> TweetPost(TweetResult tt) {
             var tokens = await CreateTokens();
-            
+
+            //nullのタスクを削除
+            tt.myTasks.RemoveAll(x => x.myTask == null);
+
             //ツイート後、レスポンス取得
             var res = tokens.Statuses.Update(status => TaskModels.CreateTasks(tt));
             Debug.Print(res.Text);

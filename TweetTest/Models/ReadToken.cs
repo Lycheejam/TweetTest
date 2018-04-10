@@ -18,8 +18,9 @@ namespace TweetTest.Models {
         /// key.json ファイルから、アクセストークンなどを読み込む。
         /// </summary>
         private static Keys ReadTokens() {
-            var json = File.ReadAllText(@"..\..\..\TweetTest\App_Data\keys.json");
+            /var json = File.ReadAllText(@"..\..\..\TweetTest\App_Data\keys.json");
             
+
             return JsonConvert.DeserializeObject<Keys>(json);
         }
 

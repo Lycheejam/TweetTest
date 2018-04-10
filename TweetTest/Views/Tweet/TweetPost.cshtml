@@ -6,8 +6,6 @@
 
 <h2>TweetPost</h2>
 <p>以下の内容をツイートしました。</p><br>
-<p>@Model.Task1</p><br>
-<p>@Model.Task2</p><br>
-<p>@Model.Task3</p><br>
-<p>@Model.Task4</p><br>
-<p>@Model.Task5</p><br>
+@foreach (var item in Model.myTasks) {
+    <p>@item.myTask</p>
+}
