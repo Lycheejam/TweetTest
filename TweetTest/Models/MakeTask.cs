@@ -2,8 +2,8 @@
 using System.Text;
 
 namespace TweetTest.Models {
-    public static class TaskModels {
-        public static string CreateTasks(TweetResult tweet) {
+    public class MakeTask {
+        public static string CreateTaskTweet(TweetResult tweet) {
             var sb = new StringBuilder();
             if (tweet.myTasks.Count == 1) {
                 sb.Append("─[] " + tweet.myTasks[0].myTask + "\r\n");
@@ -33,7 +33,7 @@ namespace TweetTest.Models {
             return sb.ToString();
         }
 
-        public static string UpdateTasks(TweetResult tweet) {
+        public static string UpdateTaskTweet(TweetResult tweet) {
             var sb = new StringBuilder();
             if (tweet.myTasks.Count == 1) {
                 sb.Append("─[" + CodeConv(tweet.myTasks[0].state) + "] " + tweet.myTasks[0].myTask + "\r\n");

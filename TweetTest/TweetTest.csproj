@@ -184,7 +184,9 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ReadToken.cs" />
-    <Compile Include="Models\TaskModels.cs" />
+    <Compile Include="Models\MakeTask.cs" />
+    <Compile Include="Models\TaskStoreManager.cs" />
+    <Compile Include="Models\TweetManager.cs" />
     <Compile Include="Models\TweetResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
