@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Linq;
+using System.Security.Claims;
+using Microsoft.AspNet.Identity;
+using System.Web;
+using System.Web.Mvc;
 
 namespace TweetTest.Models {
     public class TaskStoreManager {
@@ -25,7 +29,13 @@ namespace TweetTest.Models {
             //IDの最大値を取得
             //これ複数のuserの場合どうなる？他のユーザーのID取得してしまうんでない？
             var maxid = db.TweetResults.Max(x => x.id);
-            TweetResult tr = db.TweetResults.SingleOrDefault(x => x.id == maxid);
+            //検索条件
+            //userId,終了フラグ = 0
+            string id = HttpContext.Current.User.Identity.GetUserId();
+            //TweetResult tr = db.TweetResults.SingleOrDefault(x => x.userId == id);
+            TweetResult tr = db.TweetResults
+                                    .Where(x => x.userId == id)
+                                    .Include(nameof(MyTasks));
             return tr;
         }
 

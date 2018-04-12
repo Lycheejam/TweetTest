@@ -4,12 +4,7 @@
 }
 
 <h2>ツイート画面</h2>
-@using (Html.BeginForm("TweetPost", "Tweet", FormMethod.Post)) {
-    for (int i = 0; i < 5; i++) {
-        @Html.TextBox("myTasks[" + i + "].myTask")<br>
-    }
-    <input type="submit" value="ツイート" class="btn" />
-}
+
 
 @*<form action="/Tweet/TweetPost" method="post">
     <div class="control-group">

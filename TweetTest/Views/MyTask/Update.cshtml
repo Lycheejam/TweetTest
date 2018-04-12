@@ -1,0 +1,35 @@
+﻿@model TweetTest.Models.TweetResult
+
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/_ViewStart.cshtml";
+}
+
+<h2>Update</h2>
+
+<div>
+    <h4>TweetResult</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.userId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.userId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tweetId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tweetId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

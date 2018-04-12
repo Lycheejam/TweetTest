@@ -16,6 +16,7 @@ namespace TweetTest.Models
         public string userId { get; set; }
         public long tweetId { get; set; }
         public List<MyTask> myTasks { get; set; }
+        public int endFlag { get; set; }
     }
     public class MyTask {
         public int id { get; set; }

@@ -1,18 +1,24 @@
-﻿using CoreTweet;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using TweetTest.Models;
 using static TweetTest.Models.MakeTask;
 
 namespace TweetTest.Controllers {
-    public class TweetController : Controller {
+    public class MyTaskController : Controller {
         // GET: Tweet
         public ActionResult Index() {
+            //現状表示？
             return View();
         }
-        //テーブルを参照する際、awaitを使用しているのでasyncに変更？
-        public async Task<ActionResult> TweetPost(TweetResult tt) {
+        //タスク登録画面初期表示
+        [HttpGet]
+        public ActionResult Regist() {
+            return View();
+        }
+        //タスク登録画面からタスクをツイート&登録
+        [HttpPost]
+        public async Task<ActionResult> Regist(TweetResult tt) {
             //nullのタスクを削除
             tt.myTasks.RemoveAll(x => x.myTask == null);
             //Tweet用文字列生成
@@ -25,19 +31,21 @@ namespace TweetTest.Controllers {
 
             var tsm = new TaskStoreManager();
             if (tsm.CreateTask(tt).Equals(0)) {
-                return View(tt);    //DBへの登録が正常終了
+                return View("Index", tt);    //DBへの登録が正常終了
             }
             //失敗の時
-            return View();
+            return View("Index");
         }
 
-        public ActionResult Reply() {
-            //return View(tr);
+        //タスク更新画面の初期表示
+        [HttpGet]
+        public ActionResult Update() {
+            //現状表示？
             return View();
         }
-
+        //タスク更新画面からタスクのステータスを更新
         [HttpPost]
-        public async Task<ActionResult> TweetUpdate(TweetResult tt) {
+        public async Task<ActionResult> Update(TweetResult tt) {
             //Tweet用文字列生成
             var tweet = UpdateTaskTweet(tt);
 
@@ -47,10 +55,14 @@ namespace TweetTest.Controllers {
 
             var tsm = new TaskStoreManager();
             if (tsm.UpdateTask(tt).Equals(0)) {
-                return View("TweetPost", tt);    //DBへの登録が正常終了
+                return View("Index", tt);    //DBへの登録が正常終了
             }
             //失敗の時
-            return View();
+            return View("Index");
+        }
+        //タスクの削除
+        public ActionResult DeleteMyTask() {
+            return View("Index");
         }
     }
 }
