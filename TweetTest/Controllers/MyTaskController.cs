@@ -8,8 +8,9 @@ namespace TweetTest.Controllers {
     public class MyTaskController : Controller {
         // GET: Tweet
         public ActionResult Index() {
+            var tsm = new TaskStoreManager();
             //現状表示？
-            return View();
+            return View(tsm.ReadTask());
         }
         //タスク登録画面初期表示
         [HttpGet]
@@ -40,8 +41,9 @@ namespace TweetTest.Controllers {
         //タスク更新画面の初期表示
         [HttpGet]
         public ActionResult Update() {
+            var tsm = new TaskStoreManager();
             //現状表示？
-            return View();
+            return View(tsm.ReadTask());
         }
         //タスク更新画面からタスクのステータスを更新
         [HttpPost]

@@ -1,11 +1,11 @@
 ﻿@{
     ViewBag.Title = "Regist";
-    Layout = "~/Views/_ViewStart.cshtml";
+    @*Layout = "~/Views/_ViewStart.cshtml";*@
 }
 
 <h2>Regist</h2>
 
-@using (Html.BeginForm("PostMyTask", "MyTask", FormMethod.Post)) {
+@using (Html.BeginForm("Regist", "MyTask", FormMethod.Post)) {
     for (int i = 0; i < 5; i++) {
         @Html.TextBox("myTasks[" + i + "].myTask")<br>
     }

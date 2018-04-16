@@ -26,17 +26,12 @@ namespace TweetTest.Models {
         }
 
         public TweetResult ReadTask() {
-            //IDの最大値を取得
-            //これ複数のuserの場合どうなる？他のユーザーのID取得してしまうんでない？
-            var maxid = db.TweetResults.Max(x => x.id);
             //検索条件
             //userId,終了フラグ = 0
             string id = HttpContext.Current.User.Identity.GetUserId();
-            //TweetResult tr = db.TweetResults.SingleOrDefault(x => x.userId == id);
-            TweetResult tr = db.TweetResults
-                                    .Where(x => x.userId == id)
-                                    .Include(nameof(MyTasks));
-            return tr;
+            //最後に見つかったレコード？
+            TweetResult tr = db.TweetResults.SingleOrDefault(x => x.userId == id && x.endFlag == 0);
+            return tr;  //最後に見つかったレコードは必ずendFlagが0?
         }
 
         //タスクのステータス更新とツイートID（リプライ先）の更新

@@ -2,23 +2,22 @@
 @{
     ViewBag.Title = "index";
 }
-
-<h2>ツイート画面</h2>
-
-
-@*<form action="/Tweet/TweetPost" method="post">
-    <div class="control-group">
-        <p><label class="control-label" for="tweet">ツイート画面</label></p>
-        <div class="controls">
-            <p><input class="text-box single-line" id="task1" name="task1" type="text" value="" /></p><br>
-            <p><input class="text-box single-line" id="task2" name="task2" type="text" value="" /></p><br>
-            <p><input class="text-box single-line" id="task3" name="task3" type="text" value="" /></p><br>
-            <p><input class="text-box single-line" id="task4" name="task4" type="text" value="" /></p><br>
-            <p><input class="text-box single-line" id="task5" name="task5" type="text" value="" /></p><br>
-            <p><span class="field-validation-valid help-inline" data-valmsg-for="tweet" data-valmsg-replace="true"></span>
-        </div>
-    </div>
-    <div class="form-actions no-color">
-        <input type="submit" value="ツイート" class="btn" />
-    </div>
-</form>*@
+@model TweetTest.Models.TweetResult
+<h1>Topページ</h1>
+@if (Model != null) {
+    <h2>最新タスク</h2>
+    <table>
+        @foreach (var item in Model.myTasks) {
+            <tr>
+                <td>
+                    <p> @item.state </p>
+                </td>
+                <td>
+                    <p> @item.myTask </p>
+                </td>
+            </tr>
+        }
+    </table>
+} else {
+    <p>タスクはありません</p>
+}
