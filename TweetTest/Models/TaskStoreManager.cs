@@ -4,6 +4,8 @@ using System.Security.Claims;
 using Microsoft.AspNet.Identity;
 using System.Web;
 using System.Web.Mvc;
+using System.Diagnostics;
+using System.Data.Entity;
 
 namespace TweetTest.Models {
     public class TaskStoreManager {
@@ -25,12 +27,11 @@ namespace TweetTest.Models {
             }
         }
 
-        public TweetResult ReadTask() {
-            //検索条件
-            //userId,終了フラグ = 0
-            string id = HttpContext.Current.User.Identity.GetUserId();
-            //最後に見つかったレコード？
-            TweetResult tr = db.TweetResults.SingleOrDefault(x => x.userId == id && x.endFlag == 0);
+        public TweetResult ReadTask(string id) {
+            db.Database.Log = sql => { Debug.Write(sql); };
+            TweetResult tr = db.TweetResults.Where(x => x.userId == id && x.endFlag == 0)
+                                            .Include("MyTasks")
+                                            .SingleOrDefault();
             return tr;  //最後に見つかったレコードは必ずendFlagが0?
         }
 

@@ -8,6 +8,7 @@ namespace TweetTest.Models
 {
     public class MyContext : DbContext {
         public DbSet<TweetResult> TweetResults { get; set; }
+        public DbSet<MyTask> MyTasks { get; set; }
     }
 
     public class TweetResult

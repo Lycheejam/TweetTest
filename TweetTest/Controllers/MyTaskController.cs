@@ -5,12 +5,14 @@ using TweetTest.Models;
 using static TweetTest.Models.MakeTask;
 
 namespace TweetTest.Controllers {
+    [Authorize]
     public class MyTaskController : Controller {
+        TaskStoreManager tsm = new TaskStoreManager();
         // GET: Tweet
         public ActionResult Index() {
-            var tsm = new TaskStoreManager();
+            var id = User.Identity.GetUserId();
             //現状表示？
-            return View(tsm.ReadTask());
+            return View(tsm.ReadTask(id));
         }
         //タスク登録画面初期表示
         [HttpGet]
@@ -41,9 +43,9 @@ namespace TweetTest.Controllers {
         //タスク更新画面の初期表示
         [HttpGet]
         public ActionResult Update() {
-            var tsm = new TaskStoreManager();
+            var id = User.Identity.GetUserId();
             //現状表示？
-            return View(tsm.ReadTask());
+            return View(tsm.ReadTask(id));
         }
         //タスク更新画面からタスクのステータスを更新
         [HttpPost]
