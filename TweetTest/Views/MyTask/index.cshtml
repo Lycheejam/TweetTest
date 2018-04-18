@@ -10,7 +10,26 @@
         @foreach (var item in Model.myTasks) {
             <tr>
                 <td>
-                    <p> @item.state </p>
+                    @if (item.state == 0) {
+                    <select>
+                        <option value="0" selected="selected"></option>
+                        <option value="1">○</option>
+                        <option value="2">×</option>
+                    </select>
+                    } else if (item.state == 1) {
+                    <select>
+                        <option value="0"></option>
+                        <option value="1" selected="selected">○</option>
+                        <option value="2">×</option>
+                    </select>
+                    } else if (item.state == 2) {
+                    <select>
+                        <option value="0"></option>
+                        <option value="1">○</option>
+                        <option value="2" selected="selected">×</option>
+                    </select>
+                    }
+                    @*<p> @item.state </p>*@
                 </td>
                 <td>
                     <p> @item.myTask </p>

@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "Update";
-    Layout = "~/Views/_ViewStart.cshtml";
 }
 
 <h2>Update</h2>
@@ -10,26 +9,35 @@
 <div>
     <h4>TweetResult</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.userId)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.userId)
-        </dd>
+    @*クソコードだからこれじゃコントロール側でオブジェクトとして受け取ってくれねーよ*@
 
-        <dt>
-            @Html.DisplayNameFor(model => model.tweetId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.tweetId)
-        </dd>
-
-    </dl>
+    @using (Html.BeginForm("Update", "MyTask", FormMethod.Post)) {
+        foreach (var item in Model.myTasks) {
+            if (item.state == 0) {
+                <select>
+                    <option value="0" selected="selected"></option>
+                    <option value="1">○</option>
+                    <option value="2">×</option>
+                </select>
+            } else if (item.state == 1) {
+                <select>
+                    <option value="0"></option>
+                    <option value="1" selected="selected">○</option>
+                    <option value="2">×</option>
+                </select>
+            } else if (item.state == 2) {
+                <select>
+                    <option value="0"></option>
+                    <option value="1">○</option>
+                    <option value="2" selected="selected">×</option>
+                </select>
+            }
+            @Html.TextBox(item.id.ToString(),item.myTask,new { @readonly="readonly" })<br>
+        }
+        <input type="submit" value="ツイート" class="btn" />
+    }
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
