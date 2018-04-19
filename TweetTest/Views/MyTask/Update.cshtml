@@ -5,35 +5,14 @@
 }
 
 <h2>Update</h2>
+<hr />
 
 <div>
-    <h4>TweetResult</h4>
-    <hr />
-
-    @*クソコードだからこれじゃコントロール側でオブジェクトとして受け取ってくれねーよ*@
-
     @using (Html.BeginForm("Update", "MyTask", FormMethod.Post)) {
-        foreach (var item in Model.myTasks) {
-            if (item.state == 0) {
-                <select>
-                    <option value="0" selected="selected"></option>
-                    <option value="1">○</option>
-                    <option value="2">×</option>
-                </select>
-            } else if (item.state == 1) {
-                <select>
-                    <option value="0"></option>
-                    <option value="1" selected="selected">○</option>
-                    <option value="2">×</option>
-                </select>
-            } else if (item.state == 2) {
-                <select>
-                    <option value="0"></option>
-                    <option value="1">○</option>
-                    <option value="2" selected="selected">×</option>
-                </select>
-            }
-            @Html.TextBox(item.id.ToString(),item.myTask,new { @readonly="readonly" })<br>
+        for (int i = 0; i < Model.myTasks.Count; i++) {
+            @Html.DropDownList("Model.myTasks[" + i + "].state",
+                                new SelectList(new string[] { "", "○", "×" }, Model.myTasks[i].state))
+            @Html.TextBox("Model.myTasks[" + i + "].myTask", Model.myTasks[i].myTask)
         }
         <input type="submit" value="ツイート" class="btn" />
     }

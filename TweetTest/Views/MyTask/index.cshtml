@@ -11,23 +11,11 @@
             <tr>
                 <td>
                     @if (item.state == 0) {
-                    <select>
-                        <option value="0" selected="selected"></option>
-                        <option value="1">○</option>
-                        <option value="2">×</option>
-                    </select>
+                        <p></p>
                     } else if (item.state == 1) {
-                    <select>
-                        <option value="0"></option>
-                        <option value="1" selected="selected">○</option>
-                        <option value="2">×</option>
-                    </select>
+                        <p>○</p>
                     } else if (item.state == 2) {
-                    <select>
-                        <option value="0"></option>
-                        <option value="1">○</option>
-                        <option value="2" selected="selected">×</option>
-                    </select>
+                        <p>×</p>
                     }
                     @*<p> @item.state </p>*@
                 </td>
