@@ -10,9 +10,27 @@
 <div>
     @using (Html.BeginForm("Update", "MyTask", FormMethod.Post)) {
         for (int i = 0; i < Model.myTasks.Count; i++) {
-            @Html.DropDownList("Model.myTasks[" + i + "].state",
-                                new SelectList(new string[] { "", "○", "×" }, Model.myTasks[i].state))
-            @Html.TextBox("Model.myTasks[" + i + "].myTask", Model.myTasks[i].myTask)
+            var str = "myTasks[" + i + "].state";
+            if (Model.myTasks[i].state == 0) {
+                <select name=@str>
+                    <option value="0" selected="selected"></option>
+                    <option value="1">○</option>
+                    <option value="2">×</option>
+                </select>
+            } else if (Model.myTasks[i].state == 1) {
+                <select name=@str>
+                    <option value="0"></option>
+                    <option value="1" selected="selected">○</option>
+                    <option value="2">×</option>
+                </select>
+            } else if (Model.myTasks[i].state == 2) {
+                <select name=@str>
+                    <option value="0"></option>
+                    <option value="1">○</option>
+                    <option value="2" selected="selected">×</option>
+                </select>
+            }
+            @Html.TextBox("myTasks[" + i + "].myTask", Model.myTasks[i].myTask)
         }
         <input type="submit" value="ツイート" class="btn" />
     }

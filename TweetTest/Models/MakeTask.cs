@@ -65,11 +65,11 @@ namespace TweetTest.Models {
 
         private static string CodeConv(int code) {
             switch (code) {
-                case 1:
+                case 0:
                     return "";
-                case 2:
+                case 1:
                     return "○";
-                case 3:
+                case 2:
                     return "×";
                 default:
                     return null;
