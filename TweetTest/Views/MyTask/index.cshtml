@@ -4,27 +4,37 @@
 }
 @model TweetTest.Models.TweetResult
 <h1>Topページ</h1>
-@if (Model != null) {
-    <h2>最新タスク</h2>
-    <table>
-        @foreach (var item in Model.myTasks) {
-            <tr>
-                <td>
-                    @if (item.state == 0) {
-                        <p></p>
-                    } else if (item.state == 1) {
-                        <p>○</p>
-                    } else if (item.state == 2) {
-                        <p>×</p>
-                    }
-                    @*<p> @item.state </p>*@
-                </td>
-                <td>
-                    <p> @item.myTask </p>
-                </td>
-            </tr>
-        }
-    </table>
-} else {
-    <p>タスクはありません</p>
-}
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-lg-offset-2">
+                @if (Model != null) {
+                    <h2>最新タスク</h2>
+                    <table>
+                        @foreach (var item in Model.myTasks) {
+                            <tr>
+                                <td>
+                                    @if (item.state == 0) {
+                                        <p></p>
+                                    } else if (item.state == 1) {
+                                        <p>○</p>
+                                    } else if (item.state == 2) {
+                                        <p>×</p>
+                                    }
+                                </td>
+                                <td>
+                                    <p> @item.myTask </p>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                    <a class="btn-primary btn-lg" href="/MyTask/Regist" role="button">タスク登録</a>
+                    <a class="btn-primary btn-lg" href="/MyTask/Update" role="button">タスク更新</a>
+                } else {
+                    <p>タスクはありません</p>
+                    <a class="btn-primary btn-lg" href="/MyTask/Regist" role="button">タスク登録</a>
+                }
+            </div>
+        </div>
+    </div>
+</body>
