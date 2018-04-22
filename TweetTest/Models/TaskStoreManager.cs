@@ -29,7 +29,6 @@ namespace TweetTest.Models {
 
         public TweetResult ReadTask(string id) {
             //データ消さない方針ならendflag別にいらなくね？
-            db.Database.Log = sql => { Debug.Write(sql); };
             TweetResult tr = db.TweetResults.Where(x => x.userId == id && x.endFlag == 0)
                                             .Include("MyTasks")
                                             .SingleOrDefault();
@@ -38,7 +37,9 @@ namespace TweetTest.Models {
 
         //タスクのステータス更新とツイートID（リプライ先）の更新
         public int UpdateTask(TweetResult tr) {
-            var tresult = db.TweetResults.SingleOrDefault(x => x.id == tr.id);
+            var tresult = db.TweetResults.Where(x => x.id == tr.id)
+                                         .Include("MyTasks")
+                                         .SingleOrDefault();
             tresult = tr;
             try {
                 db.SaveChanges();
@@ -51,7 +52,6 @@ namespace TweetTest.Models {
         //タスクの削除（と言うかエンドフラグを立てて表示させないようにする。）
         public int DeleteTask(string id) {
             try {
-                db.Database.Log = sql => { Debug.Write(sql); };
                 TweetResult tr = db.TweetResults.Where(x => x.userId == id && x.endFlag == 0)
                                                 .Include("MyTasks")
                                                 .SingleOrDefault();

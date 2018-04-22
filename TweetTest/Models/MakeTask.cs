@@ -26,8 +26,6 @@ namespace TweetTest.Models {
                 sb.Append("├[] " + tweet.myTasks[3].myTask + "\r\n");
                 sb.Append("└[] " + tweet.myTasks[4].myTask + "\r\n");
             }
-            
-            sb.Append("開始時間:" + DateTime.Now + "\r\n");
             sb.Append("#3分間本気出す");
 
             return sb.ToString();
@@ -56,8 +54,7 @@ namespace TweetTest.Models {
                 sb.Append("├[" + CodeConv(tweet.myTasks[3].state) + "] " + tweet.myTasks[3].myTask + "\r\n");
                 sb.Append("└[" + CodeConv(tweet.myTasks[4].state) + "] " + tweet.myTasks[4].myTask + "\r\n");
             }
-
-            sb.Append("開始時間:" + DateTime.Now + "\r\n");
+            
             sb.Append("#3分間本気出す");
 
             return sb.ToString();
