@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Linq;
-using System.Security.Claims;
-using Microsoft.AspNet.Identity;
-using System.Web;
-using System.Web.Mvc;
-using System.Diagnostics;
 using System.Data.Entity;
+using System.Diagnostics;
 
 namespace TweetTest.Models {
     public class TaskStoreManager {
@@ -34,7 +30,6 @@ namespace TweetTest.Models {
                     TweetResult tr = db.TweetResults.Where(x => x.userId == id && x.endFlag == 0)
                                                     .Include("MyTasks")
                                                     .SingleOrDefault();
-
                     return tr;  //最後に見つかったレコードは必ずendFlagが0?
                 }
             } catch (Exception) {
@@ -46,10 +41,14 @@ namespace TweetTest.Models {
         public int UpdateTask(TweetResult tr) {
             try {
                 using (MyContext db = new MyContext()) {
-                    var tresult = db.TweetResults.Where(x => x.id == tr.id)
+                    db.Database.Log = (log) => Debug.WriteLine(log);
+                    var tresult = db.TweetResults.Where(x => x.id == tr.id && x.endFlag == 0)
                                              .Include("MyTasks")
                                              .SingleOrDefault();
-                    tresult = tr;
+                    //tresult = tr;
+                    tresult.myTasks = tr.myTasks;
+                    tresult.tweetId = tr.tweetId;
+                    //db.Database.Log = sql => { Debug.Write(sql); };
                     db.SaveChanges();
                     return 0;   //正常終了値のつもり、あとでちゃんと考えようね
                 }
@@ -63,12 +62,13 @@ namespace TweetTest.Models {
         public int DeleteTask(string id) {
             try {
                 using (MyContext db = new MyContext()) {
-
                     TweetResult tr = db.TweetResults.Where(x => x.userId == id && x.endFlag == 0)
                                                     .Include("MyTasks")
                                                     .SingleOrDefault();
-                    tr.endFlag = 1;
-                    db.SaveChanges();
+                    if (tr != null) {   //タスクが存在しなければ実行しない
+                        tr.endFlag = 1;
+                        db.SaveChanges();
+                    }
                     return 0;
                 }
             } catch (Exception) {
