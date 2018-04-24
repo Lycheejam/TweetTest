@@ -69,7 +69,7 @@ namespace TweetTest.Controllers {
             var res = await tm.ReplyTweet(tweet, tr.tweetId);
             tt.userId = tr.userId;
             tt.id = tr.id;
-            tt.tweetId = (long)res.InReplyToStatusId;
+            tt.tweetId = res.Id;
             
             if (tsm.UpdateTask(tt).Equals(0)) {
                 return View("Index", tt);    //DBへの登録が正常終了
