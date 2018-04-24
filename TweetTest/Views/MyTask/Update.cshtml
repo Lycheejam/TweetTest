@@ -13,21 +13,21 @@
             var str = "myTasks[" + i + "].state";
             if (Model.myTasks[i].state == 0) {
                 <select name=@str>
-                    <option value="0" selected="selected"></option>
+                    <option value="0" selected></option>
                     <option value="1">○</option>
                     <option value="2">×</option>
                 </select>
             } else if (Model.myTasks[i].state == 1) {
                 <select name=@str>
                     <option value="0"></option>
-                    <option value="1" selected="selected">○</option>
+                    <option value="1" selected>○</option>
                     <option value="2">×</option>
                 </select>
             } else if (Model.myTasks[i].state == 2) {
                 <select name=@str>
                     <option value="0"></option>
                     <option value="1">○</option>
-                    <option value="2" selected="selected">×</option>
+                    <option value="2" selected>×</option>
                 </select>
             }
             @Html.TextBox("myTasks[" + i + "].myTask", Model.myTasks[i].myTask)
