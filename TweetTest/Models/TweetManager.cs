@@ -23,6 +23,12 @@ namespace TweetTest.Models {
                                             , in_reply_to_status_id => tweetId);
             return res;
         }
+        //ツイート埋め込みウィジェット用のjsonデータを取得
+        public async Task<Embed> EmbedTweetGet(long tweetId) {
+            var tokens = await CreateTokens();
+            var emb = tokens.Statuses.Oembed(tweetId);
+            return emb;
+        }
         //claimテーブルの参照はコピペ AccessToken&Secretをテーブルから参照する。
         //コピペ元 » ASP.NET Identity：Twitter認証時の情報でツイートする方法 - なか日記 
         // http://blog.nakajix.jp/entry/2014/09/12/074000

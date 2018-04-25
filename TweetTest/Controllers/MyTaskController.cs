@@ -10,10 +10,15 @@ namespace TweetTest.Controllers {
     public class MyTaskController : Controller {
         TaskStoreManager tsm = new TaskStoreManager();
         // GET: Tweet
-        public ActionResult Index() {
+        public async Task<ActionResult> Index() {
             var id = User.Identity.GetUserId();
+            var res = tsm.ReadTask(id);
+
+            var tm = new TweetManager();
+            var emb = await tm.EmbedTweetGet(res.tweetId);
+            Console.WriteLine(emb.Html);
             //現状表示？
-            return View(tsm.ReadTask(id));
+            return View(emb);
         }
 
         //タスク登録画面初期表示
