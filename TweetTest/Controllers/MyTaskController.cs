@@ -16,7 +16,6 @@ namespace TweetTest.Controllers {
 
             var tm = new TweetManager();
             var emb = await tm.EmbedTweetGet(res.tweetId);
-            Console.WriteLine(emb.Html);
             //現状表示？
             return View(emb);
         }
@@ -47,7 +46,7 @@ namespace TweetTest.Controllers {
             tt.userId = User.Identity.GetUserId();
             
             if (tsm.CreateTask(tt).Equals(0)) {
-                return View("Index", tt);    //DBへの登録が正常終了
+                return View("Index", await tm.EmbedTweetGet(tt.tweetId));    //DBへの登録が正常終了
             }
             //失敗の時
             return View("Index");
@@ -77,7 +76,7 @@ namespace TweetTest.Controllers {
             tt.tweetId = res.Id;
             
             if (tsm.UpdateTask(tt).Equals(0)) {
-                return View("Index", tt);    //DBへの登録が正常終了
+                return View("Index", tm.EmbedTweetGet(tt.tweetId));    //DBへの登録が正常終了
             }
             //失敗の時
             return View("Index");
