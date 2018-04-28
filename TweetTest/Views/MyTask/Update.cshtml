@@ -7,34 +7,47 @@
 <h2>Update</h2>
 <hr />
 
-<div>
-    @using (Html.BeginForm("Update", "MyTask", FormMethod.Post)) {
-        for (int i = 0; i < Model.myTasks.Count; i++) {
-            var str = "myTasks[" + i + "].state";
-            if (Model.myTasks[i].state == 0) {
-                <select name=@str>
-                    <option value="0" selected></option>
-                    <option value="1">○</option>
-                    <option value="2">×</option>
-                </select>
-            } else if (Model.myTasks[i].state == 1) {
-                <select name=@str>
-                    <option value="0"></option>
-                    <option value="1" selected>○</option>
-                    <option value="2">×</option>
-                </select>
-            } else if (Model.myTasks[i].state == 2) {
-                <select name=@str>
-                    <option value="0"></option>
-                    <option value="1">○</option>
-                    <option value="2" selected>×</option>
-                </select>
-            }
-            @Html.TextBox("myTasks[" + i + "].myTask", Model.myTasks[i].myTask)
-        }
-        <input type="submit" value="ツイート" class="btn-success btn-lg" />
-    }
-</div>
-<p>
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<body class="bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                @using (Html.BeginForm("Update", "MyTask", FormMethod.Post)) {
+                    for (int i = 0; i < Model.myTasks.Count; i++) {
+                        var str = "myTasks[" + i + "].state";
+                        if (Model.myTasks[i].state == 0) {
+                            <select name=@str>
+                                <option value="0" selected></option>
+                                <option value="1">○</option>
+                                <option value="2">×</option>
+                            </select>
+                        } else if (Model.myTasks[i].state == 1) {
+                            <select name=@str>
+                                <option value="0"></option>
+                                <option value="1" selected>○</option>
+                                <option value="2">×</option>
+                            </select>
+                        } else if (Model.myTasks[i].state == 2) {
+                            <select name=@str>
+                                <option value="0"></option>
+                                <option value="1">○</option>
+                                <option value="2" selected>×</option>
+                            </select>
+                        }
+                        @Html.TextBox("myTasks[" + i + "].myTask"
+                          , Model.myTasks[i].myTask
+                          , new {
+                              @class = "form-control",
+                              type = "text"
+                          })
+                    }
+                    <input type="submit" value="ツイート" class="btn-success btn-lg" />
+                }
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</body>

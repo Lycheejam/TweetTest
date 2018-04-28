@@ -25,7 +25,7 @@ namespace TweetTest.Controllers {
         public ActionResult Regist() {
             //最新タスクの削除処理
             var id = User.Identity.GetUserId();
-            if (tsm.DeleteTask(id) == 0) {
+            if (tsm.DeleteTask(id)) {
                 return View();  //削除正常終了
             }
             //なにかによって失敗した場合
@@ -45,7 +45,7 @@ namespace TweetTest.Controllers {
             tt.tweetId = res.Id;
             tt.userId = User.Identity.GetUserId();
             
-            if (tsm.CreateTask(tt).Equals(0)) {
+            if (tsm.CreateTask(tt)) {
                 return View("Index", await tm.EmbedTweetGet(tt.tweetId));    //DBへの登録が正常終了
             }
             //失敗の時
@@ -75,8 +75,8 @@ namespace TweetTest.Controllers {
             tt.id = tr.id;
             tt.tweetId = res.Id;
             
-            if (tsm.UpdateTask(tt).Equals(0)) {
-                return View("Index", tm.EmbedTweetGet(tt.tweetId));    //DBへの登録が正常終了
+            if (tsm.UpdateTask(tt)) {
+                return View("Index", await tm.EmbedTweetGet(tt.tweetId));    //DBへの登録が正常終了
             }
             //失敗の時
             return View("Index");

@@ -6,7 +6,7 @@ using System.Diagnostics;
 namespace TweetTest.Models {
     public class TaskStoreManager {
         //タスクの初回登録
-        public int CreateTask(TweetResult tr) {
+        public bool CreateTask(TweetResult tr) {
             var tresult = new TweetResult {
                 userId = tr.userId,
                 myTasks = tr.myTasks,
@@ -17,7 +17,7 @@ namespace TweetTest.Models {
                     db.TweetResults.Add(tr);
                     db.SaveChanges();
                 }
-                return 0;   //正常終了値のつもり、あとでちゃんと考えようね
+                return true;   //正常終了値のつもり、あとでちゃんと考えようね
             } catch (Exception) {
                 throw;
             }
@@ -38,7 +38,7 @@ namespace TweetTest.Models {
         }
 
         //タスクのステータス更新とツイートID（リプライ先）の更新
-        public int UpdateTask(TweetResult tr) {
+        public bool UpdateTask(TweetResult tr) {
             try {
                 using (MyContext db = new MyContext()) {
                     db.Database.Log = (log) => Debug.WriteLine(log);
@@ -50,7 +50,7 @@ namespace TweetTest.Models {
                     tresult.tweetId = tr.tweetId;
                     //db.Database.Log = sql => { Debug.Write(sql); };
                     db.SaveChanges();
-                    return 0;   //正常終了値のつもり、あとでちゃんと考えようね
+                    return true;   //正常終了値のつもり、あとでちゃんと考えようね
                 }
             } catch (Exception) {
                 throw;
@@ -59,7 +59,7 @@ namespace TweetTest.Models {
 
 
         //タスクの削除（と言うかエンドフラグを立てて表示させないようにする。）
-        public int DeleteTask(string id) {
+        public bool DeleteTask(string id) {
             try {
                 using (MyContext db = new MyContext()) {
                     TweetResult tr = db.TweetResults.Where(x => x.userId == id && x.endFlag == 0)
@@ -69,7 +69,7 @@ namespace TweetTest.Models {
                         tr.endFlag = 1;
                         db.SaveChanges();
                     }
-                    return 0;
+                    return true;
                 }
             } catch (Exception) {
                 throw;
