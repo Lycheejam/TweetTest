@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNet.Identity;
-using System;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using TweetTest.Models;

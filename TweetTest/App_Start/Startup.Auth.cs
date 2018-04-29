@@ -74,11 +74,12 @@ namespace TweetTest
             });
             options.Provider = new TwitterAuthenticationProvider()
             {
-                OnAuthenticated = async (context) =>
-                {
+#pragma warning disable CS1998 // 非同期メソッドは、'await' 演算子がないため、同期的に実行されます
+                OnAuthenticated = async (context) =>{
                     context.Identity.AddClaim(new Claim("ExternalAccessToken", context.AccessToken));
                     context.Identity.AddClaim(new Claim("ExternalAccessTokenSecret", context.AccessTokenSecret));
                 }
+#pragma warning restore CS1998 // 非同期メソッドは、'await' 演算子がないため、同期的に実行されます
             };
 
             app.UseTwitterAuthentication(options);

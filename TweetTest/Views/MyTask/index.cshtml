@@ -1,29 +1,44 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "index";
 }
 
 @model CoreTweet.Embed
-<h1>Topページ</h1>
-
 <div class="row">
+    <div class="col"></div>
     <div class="col">
-        <div class="card">
-            <h2 class="card-header">最新タスク</h2>
+        <div class="card border-primary">
             <div class="card-body">
+                <h2 class="card-title">最新タスク</h2>
                 @Html.Raw(@Model.Html)
             </div>
             <div class="card-footer">
-                <a class="btn-primary btn-lg" href="/MyTask/Regist" role="button">タスク登録</a>
-                <a class="btn-primary btn-lg" href="/MyTask/Update" role="button">タスク更新</a>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registModal">
+                    タスク登録
+                </button>
+                <a class="btn btn-primary" href="/MyTask/Update" role="button">タスク更新</a>
             </div>
         </div>
     </div>
+    <div class="col"></div>
 </div>
-<div class="card">
-    <h5 class="card-header">ヘッダのタイトル</h5>
-    <div class="card-body">
-        コンテンツ
+@*モーダルウィンドウの表示（タスク削除の注意）*@
+<div class="modal fade" id="registModal" tabindex="-1" role="dialog" aria-labelledby="registModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="registModalLabel">注意</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>過去のタスクはクローズされます。</p>
+                <p>よろしいですか？</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+                <a class="btn btn-primary" href="/MyTask/Regist" role="button">タスク登録</a>
+            </div>
+        </div>
     </div>
-    <div class="card-footer">フッタ</div>
 </div>
