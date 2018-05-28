@@ -12,33 +12,41 @@
                 <h2 class="card-title">タスク更新</h2>
                 @using (Html.BeginForm("Update", "MyTask", FormMethod.Post)) {
                     for (int i = 0; i < Model.myTasks.Count; i++) {
-                        var str = "myTasks[" + i + "].state";
                         int numno = i + 1;
                         if (Model.myTasks[i].state == 0) {
-                            <select name=@str>
-                                <option value="0" selected></option>
-                                <option value="1">○</option>
-                                <option value="2">×</option>
-                            </select>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-light active">
+                                    <input type="radio" name="myTasks[@i].state" value="1" autocomplete="off"> ○
+                                </label>
+                                <label class="btn btn-light">
+                                    <input type="radio" name="myTasks[@i].state" value="2" autocomplete="off"> ×
+                                </label>
+                            </div>
                         } else if (Model.myTasks[i].state == 1) {
-                            <select name=@str>
-                                <option value="0"></option>
-                                <option value="1" selected>○</option>
-                                <option value="2">×</option>
-                            </select>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-light active">
+                                    <input type="radio" name="myTasks[@i].state" value="1" autocomplete="off" checked> ○
+                                </label>
+                                <label class="btn btn-light">
+                                    <input type="radio" name="myTasks[@i].state" value="2" autocomplete="off"> ×
+                                </label>
+                            </div>
                         } else if (Model.myTasks[i].state == 2) {
-                            <select name=@str>
-                                <option value="0"></option>
-                                <option value="1">○</option>
-                                <option value="2" selected>×</option>
-                            </select>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-light active">
+                                    <input type="radio" name="myTasks[@i].state" value="1" autocomplete="off"> ○
+                                </label>
+                                <label class="btn btn-light">
+                                    <input type="radio" name="myTasks[@i].state" value="2" autocomplete="off" checked> ×
+                                </label>
+                            </div>
                         }
                         <div class="form-group">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">No.@numno</div>
                                 </div>
-                                <input class="form-control rounded-right" type="text" name="myTasks[@i].myTask" value=@Model.myTasks[i].myTask readonly="readonly">
+                                <input class="form-control" type="text" name="myTasks[@i].myTask" value=@Model.myTasks[i].myTask readonly="readonly">
                             </div>
                         </div>
                     }
