@@ -2,31 +2,25 @@
     ViewBag.Title = "Regist";
 }
 
-<div class="row">
-    <div class="col"></div>
-    <div class="col">
-        <div class="card border-primary">
-            <div class="card-body">
-                <h2 class="card-title">タスク登録</h2>
-                @using (Html.BeginForm("Regist", "MyTask", FormMethod.Post)) {
-                    for (int i = 0; i < 5; i++) {
-                        int numno = i + 1;
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">No.@numno</div>
-                                </div>
-                                <input class="form-control" type="text" name="myTasks[@i].myTask">
-                            </div>
+<div class="card border-primary">
+    <div class="card-body">
+        <h2 class="card-title">タスク登録</h2>
+        @using (Html.BeginForm("Regist", "MyTask", FormMethod.Post)) {
+            for (int i = 0; i < 5; i++) {
+                int numno = i + 1;
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">No.@numno</div>
                         </div>
-                        }
-                    }
+                        <input class="form-control" type="text" name="myTasks[@i].myTask">
+                    </div>
                 </div>
-            <div class="card-footer">
-                <a class="btn btn-lg btn-block btn-primary" href="/MyTask/Index" role="button">戻る</a>
-                <button type="submit" class="btn btn-lg btn-block btn-primary">Submit</button>
-            </div>
+                }
+            }
         </div>
+        <div class="card-footer">
+                <a class="btn btn-primary" href="/MyTask/Index" role="button">戻る</a>
+                <button type="submit" class="btn btn-primary">Submit</button>
     </div>
-    <div class="col"></div>
 </div>

@@ -11,30 +11,28 @@
     <meta name="description" content="The description of my page" />
 </head>
 <body>
-    <header><div class="row">
-    <div class="col"></div>
-    <div class="col">
-        <div class="container">
-            <nav class="navbar navbar-light bg-light navbar-expand-lg mb-5 mx-4 border border-primary rounded">
-                @Html.ActionLink("３分間本気出す。", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                <div class="collapse navbar-collapse justify-content-end">
-                    @Html.Partial("_LoginPartial")
-                </div>
-            </nav>
-        </div>
-    </div>
-    <div class="col"></div>
-</header>
     <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - 3分間本気出す。</p>
-        </footer>
-    </div>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-6">
+                <header>
+                    <nav class="navbar navbar-light bg-light mb-5 border border-primary rounded">
+                        @Html.ActionLink("３分間本気出す。", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                            @Html.Partial("_LoginPartial")
+                    </nav>
+                </header>
+                @RenderBody()
+                <hr />
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - 3分間本気出す。</p>
+                </footer>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+            @Scripts.Render("~/bundles/jquery")
+            @Scripts.Render("~/bundles/bootstrap")
+            @RenderSection("scripts", required: false)
+        </div>
+        <div class="col"></div>
+    </div>
+    </div>
 </body>
 </html>

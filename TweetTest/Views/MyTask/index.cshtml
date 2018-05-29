@@ -4,24 +4,19 @@
 
 @model CoreTweet.Embed
 
-<div class="row">
-    <div class="col"></div>
-    <div class="col">
-        <div class="card border-primary">
-            <div class="card-body">
-                <h2 class="card-title">最新タスク</h2>
-                @Html.Raw(@Model.Html)
-            </div>
-            <div class="card-footer">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registModal">
-                    タスク登録
-                </button>
-                <a class="btn btn-primary" href="/MyTask/Update" role="button">タスク更新</a>
-            </div>
-        </div>
+<div class="card border-primary">
+    <div class="card-body">
+        <h2 class="card-title">最新タスク</h2>
+        @Html.Raw(@Model.Html)
     </div>
-    <div class="col"></div>
+    <div class="card-footer">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registModal">
+            タスク登録
+        </button>
+        <a class="btn btn-primary" href="/MyTask/Update" role="button">タスク更新</a>
+    </div>
 </div>
+
 @*モーダルウィンドウの表示（タスク削除の注意）*@
 <div class="modal fade" id="registModal" tabindex="-1" role="dialog" aria-labelledby="registModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
