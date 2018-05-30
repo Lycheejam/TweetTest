@@ -1,20 +1,12 @@
 ﻿@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated)
-{
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "form-inline" }))
-    {
-    @Html.AntiForgeryToken()
+@if (Request.IsAuthenticated) {
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "form-inline" })) {
+        @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav mr-auto">
-        <li>
-            @Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">ログオフ</a></li>
-    </ul>
+        <a class="btn btn-primary" href="/Manage/Index" role="button">@User.Identity.GetUserName()</a>
+        <a class="btn btn-primary" href="javascript:document.getElementById('logoutForm').submit()" role="button">ログオフ</a>
     }
-}
-else
-{
-        <li>@Html.ActionLink("登録", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink"})</li>
-        <li>@Html.ActionLink("ログイン", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+} else {
+    <a class="btn btn-primary" href="/Account/Register" role="button" id="registerLink">登録</a>
+    <a class="btn btn-primary" href="/Account/Login" role="button" id="loginLink">ログイン</a>
 }
