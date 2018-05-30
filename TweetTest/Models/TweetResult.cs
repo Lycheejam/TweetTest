@@ -2,17 +2,14 @@
 using System.Data.Entity;
 
 namespace TweetTest.Models {
-    public class MyContext : DbContext {
-        public DbSet<TweetResult> TweetResults { get; set; }
-        public DbSet<MyTask> MyTasks { get; set; }
-    }
+    
 
     public class TweetResult
     {
         public int id { get; set; }
         public string userId { get; set; }
         public long tweetId { get; set; }
-        public List<MyTask> myTasks { get; set; }
+        public virtual List<MyTask> myTasks { get; set; }
         public int endFlag { get; set; }
     }
     public class MyTask {

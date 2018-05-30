@@ -26,6 +26,9 @@ namespace TweetTest.Models
         {
         }
 
+        public DbSet<TweetResult> TweetResults { get; set; }
+        public DbSet<MyTask> MyTasks { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
