@@ -199,14 +199,14 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\GetToken.cs" />
+    <Compile Include="TaskManager\GetToken.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\ReadToken.cs" />
-    <Compile Include="Models\MakeTask.cs" />
-    <Compile Include="Models\TaskStoreManager.cs" />
-    <Compile Include="Models\TweetManager.cs" />
-    <Compile Include="Models\TweetResult.cs" />
+    <Compile Include="TaskManager\ReadToken.cs" />
+    <Compile Include="TaskManager\TweetCreater.cs" />
+    <Compile Include="TaskManager\TaskStoreManager.cs" />
+    <Compile Include="TaskManager\TweetManager.cs" />
+    <Compile Include="TaskManager\TweetResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
