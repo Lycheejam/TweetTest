@@ -2,8 +2,6 @@
 using System.Data.Entity;
 
 namespace TweetTest.Models {
-    
-
     public class TweetResult
     {
         public int id { get; set; }

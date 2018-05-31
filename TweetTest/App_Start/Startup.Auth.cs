@@ -41,24 +41,6 @@ namespace TweetTest
             });            
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
-            // 2 要素認証プロセスの中で 2 つ目の要素を確認するときにユーザー情報を一時的に保存するように設定します。
-            app.UseTwoFactorSignInCookie(DefaultAuthenticationTypes.TwoFactorCookie, TimeSpan.FromMinutes(5));
-
-            // 2 つ目のログイン確認要素 (電話や電子メールなど) を記憶するように設定します。
-            // このオプションをオンにすると、ログイン プロセスの中の確認の第 2 ステップは、ログインに使用されたデバイスに保存されます。
-            // これは、ログイン時の「このアカウントを記憶する」オプションに似ています。
-            app.UseTwoFactorRememberBrowserCookie(DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie);
-
-            // 次の行のコメントを解除して、サード パーティのログイン プロバイダーを使用したログインを有効にします
-            //app.UseMicrosoftAccountAuthentication(
-            //    clientId: "",
-            //    clientSecret: "");
-
-            //app.UseTwitterAuthentication(
-            //   consumerKey: "",
-            //   consumerSecret: "");
-
-
             var keys = MyTokens;
 
             var options = new TwitterAuthenticationOptions();
@@ -83,16 +65,6 @@ namespace TweetTest
             };
 
             app.UseTwitterAuthentication(options);
-
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
-
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
         }
     }
 }

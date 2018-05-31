@@ -6,8 +6,8 @@ namespace TweetTest.Models
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
-        [Display(Name = "電子メール")]
-        public string Email { get; set; }
+        [Display(Name = "ユーザー名")]
+        public string Name { get; set; }
     }
 
     public class ExternalLoginListViewModel

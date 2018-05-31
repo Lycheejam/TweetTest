@@ -4,18 +4,28 @@
 
 @model CoreTweet.Embed
 
-<div class="card border-primary">
-    <div class="card-body">
-        <h2 class="card-title">最新タスク</h2>
-        @Html.Raw(@Model.Html)
+@if (Request.IsAuthenticated) {
+    <div class="card border-primary">
+        <div class="card-body">
+            <h2 class="card-title">最新タスク</h2>
+            @Html.Raw(@Model.Html)
+        </div>
+        <div class="card-footer">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registModal">
+                タスク登録
+            </button>
+            <a class="btn btn-primary" href="/MyTask/Update" role="button">タスク更新</a>
+        </div>
     </div>
-    <div class="card-footer">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registModal">
-            タスク登録
-        </button>
-        <a class="btn btn-primary" href="/MyTask/Update" role="button">タスク更新</a>
+} else {
+    <div class="card border-primary">
+        <div class="card-body">
+            <h2 class="card-title">ようこそ</h2>
+            <a class="btn btn-primary btn-block" href="/Account/Register" role="button" id="registerLink">登録</a>
+            <a class="btn btn-primary btn-block" href="/Account/Login" role="button" id="loginLink">ログイン</a>
+        </div>
     </div>
-</div>
+}
 
 @*モーダルウィンドウの表示（タスク削除の注意）*@
 <div class="modal fade" id="registModal" tabindex="-1" role="dialog" aria-labelledby="registModalLabel" aria-hidden="true">

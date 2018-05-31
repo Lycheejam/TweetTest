@@ -14,24 +14,6 @@ using TweetTest.Models;
 
 namespace TweetTest
 {
-    public class EmailService : IIdentityMessageService
-    {
-        public Task SendAsync(IdentityMessage message)
-        {
-            // 電子メールを送信するには、電子メール サービスをここにプラグインします。
-            return Task.FromResult(0);
-        }
-    }
-
-    public class SmsService : IIdentityMessageService
-    {
-        public Task SendAsync(IdentityMessage message)
-        {
-            // テキスト メッセージを送信するための SMS サービスをここにプラグインします。
-            return Task.FromResult(0);
-        }
-    }
-
     // このアプリケーションで使用されるアプリケーション ユーザー マネージャーを設定します。UserManager は ASP.NET Identity の中で定義されており、このアプリケーションで使用されます。
     public class ApplicationUserManager : UserManager<ApplicationUser>
     {
@@ -47,17 +29,7 @@ namespace TweetTest
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)
             {
                 AllowOnlyAlphanumericUserNames = false,
-                RequireUniqueEmail = true
-            };
-
-            // パスワードの検証ロジックを設定します
-            manager.PasswordValidator = new PasswordValidator
-            {
-                RequiredLength = 6,
-                RequireNonLetterOrDigit = true,
-                RequireDigit = true,
-                RequireLowercase = true,
-                RequireUppercase = true,
+                RequireUniqueEmail = false
             };
 
             // ユーザー ロックアウトの既定値を設定します。
@@ -65,19 +37,6 @@ namespace TweetTest
             manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
             manager.MaxFailedAccessAttemptsBeforeLockout = 5;
 
-            // 2 要素認証プロバイダーを登録します。このアプリケーションでは、Phone and Emails をユーザー検証用コード受け取りのステップとして使用します。
-            // 独自のプロバイダーをプログラミングしてここにプラグインできます。
-            manager.RegisterTwoFactorProvider("電話コード", new PhoneNumberTokenProvider<ApplicationUser>
-            {
-                MessageFormat = "あなたのセキュリティ コードは {0} です。"
-            });
-            manager.RegisterTwoFactorProvider("電子メール コード", new EmailTokenProvider<ApplicationUser>
-            {
-                Subject = "セキュリティ コード",
-                BodyFormat = "あなたのセキュリティ コードは {0} です。"
-            });
-            manager.EmailService = new EmailService();
-            manager.SmsService = new SmsService();
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
