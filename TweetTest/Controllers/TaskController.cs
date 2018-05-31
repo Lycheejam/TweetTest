@@ -2,11 +2,11 @@
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using TweetTest.Models;
-using static TweetTest.Models.MakeTask;
+using static TweetTest.Models.TweetCreater;
 
 namespace TweetTest.Controllers {
     [Authorize]
-    public class MyTaskController : Controller {
+    public class TaskController : Controller {
         TaskStoreManager tsm = new TaskStoreManager();
         // GET: Tweet
         public async Task<ActionResult> Index() {
@@ -35,9 +35,9 @@ namespace TweetTest.Controllers {
         [HttpPost]
         public async Task<ActionResult> Regist(TweetResult tt) {
             //nullのタスクを削除
-            tt.myTasks.RemoveAll(x => x.myTask == null);
+            tt.tasks.RemoveAll(x => x.task == null);
             //Tweet用文字列生成
-            var tweet = CreateTaskTweet(tt);
+            var tweet = CreateTask(tt);
 
             var tm = new TweetManager();
             var res = await tm.PostTweet(tweet);
@@ -63,7 +63,7 @@ namespace TweetTest.Controllers {
         [HttpPost]
         public async Task<ActionResult> Update(TweetResult tt) {
             //Tweet用文字列生成
-            var tweet = UpdateTaskTweet(tt);
+            var tweet = UpdateTask(tt);
 
             var id = User.Identity.GetUserId();
             var tr = tsm.ReadTask(id);

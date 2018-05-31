@@ -28,7 +28,7 @@ namespace TweetTest.Models {
                 using (var db = new ApplicationDbContext()) {
                     //データ消さない方針ならendflag別にいらなくね？
                     TweetResult tr = db.TweetResults.Where(x => x.userId == id && x.endFlag == 0)
-                                                    .Include("MyTasks")
+                                                    .Include(x => x.tasks)
                                                     .SingleOrDefault();
                     return tr;  //最後に見つかったレコードは必ずendFlagが0?
                 }
@@ -43,7 +43,7 @@ namespace TweetTest.Models {
                 using (var db = new ApplicationDbContext()) {
                     db.Database.Log = (log) => Debug.WriteLine(log);
                     var tresult = db.TweetResults.Where(x => x.id == tr.id && x.endFlag == 0)
-                                             .Include("MyTasks")
+                                             .Include(x => x.tasks)
                                              .SingleOrDefault();
                     //tresult = tr;
                     tresult.tasks = tr.tasks;
@@ -63,7 +63,7 @@ namespace TweetTest.Models {
             try {
                 using (var db = new ApplicationDbContext()) {
                     TweetResult tr = db.TweetResults.Where(x => x.userId == id && x.endFlag == 0)
-                                                    .Include("MyTasks")
+                                                    .Include(x => x.tasks)
                                                     .SingleOrDefault();
                     if (tr != null) {   //タスクが存在しなければ実行しない
                         tr.endFlag = 1;
