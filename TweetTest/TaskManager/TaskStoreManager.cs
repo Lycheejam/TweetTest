@@ -9,7 +9,7 @@ namespace TweetTest.Models {
         public bool CreateTask(TweetResult tr) {
             var tresult = new TweetResult {
                 userId = tr.userId,
-                myTasks = tr.myTasks,
+                tasks = tr.tasks,
                 tweetId = tr.tweetId
             };
             try {
@@ -46,7 +46,7 @@ namespace TweetTest.Models {
                                              .Include("MyTasks")
                                              .SingleOrDefault();
                     //tresult = tr;
-                    tresult.myTasks = tr.myTasks;
+                    tresult.tasks = tr.tasks;
                     tresult.tweetId = tr.tweetId;
                     //db.Database.Log = sql => { Debug.Write(sql); };
                     db.SaveChanges();
