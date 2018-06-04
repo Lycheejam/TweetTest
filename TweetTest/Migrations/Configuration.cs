@@ -9,7 +9,7 @@ namespace TweetTest.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(TweetTest.Models.ApplicationDbContext context)

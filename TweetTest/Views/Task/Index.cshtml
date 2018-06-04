@@ -7,8 +7,12 @@
 @if (Request.IsAuthenticated) {
     <div class="card border-primary">
         <div class="card-body">
-            <h2 class="card-title">最新タスク</h2>
-            @Html.Raw(@Model.Html)
+            @if (Model.Html != null) {
+                <h2 class="card-title">最新タスク</h2>
+                @Html.Raw(@Model.Html)
+            } else {
+                <h2 class="card-title">新しくタスクを登録しましょう。</h2>
+            }
         </div>
         <div class="card-footer">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registModal">

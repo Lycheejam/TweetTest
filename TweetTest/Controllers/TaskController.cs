@@ -12,10 +12,12 @@ namespace TweetTest.Controllers {
         public async Task<ActionResult> Index() {
             var id = User.Identity.GetUserId();
             var res = tsm.ReadTask(id);
+            if () {
+                return View();
+            }
 
             var tm = new TweetManager();
             var emb = await tm.EmbedTweetGet(res.tweetId);
-            //現状表示？
             return View(emb);
         }
 
