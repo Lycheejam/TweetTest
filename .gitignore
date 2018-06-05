@@ -241,3 +241,4 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 /TweetTest/App_Data/keys.json
+/TweetTest/Properties/PublishProfiles/87993482-0ee0-4-231-b9ee - Web Deploy.pubxml
