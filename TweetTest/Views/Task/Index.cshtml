@@ -7,7 +7,7 @@
 @if (Request.IsAuthenticated) {
     <div class="card border-primary">
         <div class="card-body">
-            @if (Model.Html != null) {
+            @if (Model != null) {
                 <h2 class="card-title">最新タスク</h2>
                 @Html.Raw(@Model.Html)
             } else {

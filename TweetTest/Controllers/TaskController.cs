@@ -11,14 +11,20 @@ namespace TweetTest.Controllers {
         // GET: Tweet
         public async Task<ActionResult> Index() {
             var id = User.Identity.GetUserId();
-            var res = tsm.ReadTask(id);
-            if () {
-                return View();
-            }
+            if (null == id) {
+                var res = tsm.ReadTask(id);
+                if (null == res) {
+                    //ログイン中 かつ タスクが存在しない場合
+                    return View();
+                }
 
-            var tm = new TweetManager();
-            var emb = await tm.EmbedTweetGet(res.tweetId);
-            return View(emb);
+                var tm = new TweetManager();
+                var emb = await tm.EmbedTweetGet(res.tweetId);
+                //ログイン中 かつ タスクが存在した場合の表示
+                return View(emb);
+            }
+            //ログインしていない場合の初期表示
+            return View();
         }
 
         //タスク登録画面初期表示
