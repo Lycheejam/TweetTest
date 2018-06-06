@@ -3,24 +3,24 @@
 }
 
 <div class="card border-primary">
-    <div class="card-body">
-        <h2 class="card-title">タスク登録</h2>
-        @using (Html.BeginForm("Regist", "Task", FormMethod.Post)) {
-            for (int i = 0; i < 5; i++) {
-                int numno = i + 1;
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">No.@numno</div>
-                        </div>
-                        <input class="form-control" type="text" name="tasks[@i].task">
+    @using (Html.BeginForm("Regist", "Task", FormMethod.Post)) {
+        <div class="card-body">
+            <h2 class="card-title">タスク登録</h2>
+            @for (int i = 0; i < 5; i++) {
+            int numno = i + 1;
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">No.@numno</div>
                     </div>
+                    <input class="form-control" type="text" name="tasks[@i].task">
                 </div>
-                }
+            </div>
             }
         </div>
         <div class="card-footer">
-                <a class="btn btn-primary" href="/Task/Index" role="button">戻る</a>
-                <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
+            <a class="btn btn-primary" href="/Task/Index" role="button">戻る</a>
+            <input type="submit" class="btn btn-primary" value="Submit">
+        </div>
+    }
 </div>

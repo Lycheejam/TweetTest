@@ -5,54 +5,52 @@
 }
 
 <div class="card border-primary">
-    <div class="card-body">
-        <h2 class="card-title">タスク更新</h2>
-        @using (Html.BeginForm("Update", "Task", FormMethod.Post)) {
-            for (int i = 0; i < Model.tasks.Count; i++) {
-                int numno = i + 1;
-                <div class="form-group">
-                    <div class="input-group">
-                        @if (Model.tasks[i].state == 0) {
-                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                <label class="btn btn-light active">
-                                    <input type="radio" name="tasks[@i].state" value="1" autocomplete="off"> ○
-                                </label>
-                                <label class="btn btn-light">
-                                    <input type="radio" name="tasks[@i].state" value="2" autocomplete="off"> ×
-                                </label>
-                            </div>
-                        } else if (Model.tasks[i].state == 1) {
-                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                <label class="btn btn-light active">
-                                    <input type="radio" name="tasks[@i].state" value="1" autocomplete="off" checked> ○
-                                </label>
-                                <label class="btn btn-light">
-                                    <input type="radio" name="tasks[@i].state" value="2" autocomplete="off"> ×
-                                </label>
-                            </div>
-                        } else if (Model.tasks[i].state == 2) {
-                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                <label class="btn btn-light active">
-                                    <input type="radio" name="tasks[@i].state" value="1" autocomplete="off"> ○
-                                </label>
-                                <label class="btn btn-light">
-                                    <input type="radio" name="tasks[@i].state" value="2" autocomplete="off" checked> ×
-                                </label>
-                            </div>
-                        }
-                        @*</div>
-        <div class="input-group">*@
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">No.@numno</div>
+    @using (Html.BeginForm("Update", "Task", FormMethod.Post)) {
+        <div class="card-body">
+            <h2 class="card-title">タスク更新</h2>
+            @for (int i = 0; i < Model.tasks.Count; i++) {
+            int numno = i + 1;
+            <div class="form-group">
+                <div class="input-group">
+                    @if (Model.tasks[i].state == 0) {
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-light active">
+                                <input type="radio" name="tasks[@i].state" value="1" autocomplete="off"> ○
+                            </label>
+                            <label class="btn btn-light">
+                                <input type="radio" name="tasks[@i].state" value="2" autocomplete="off"> ×
+                            </label>
                         </div>
-                        <input class="form-control" type="text" name="tasks[@i].task" value=@Model.tasks[i].task readonly="readonly">
+                    } else if (Model.tasks[i].state == 1) {
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-light active">
+                                <input type="radio" name="tasks[@i].state" value="1" autocomplete="off" checked> ○
+                            </label>
+                            <label class="btn btn-light">
+                                <input type="radio" name="tasks[@i].state" value="2" autocomplete="off"> ×
+                            </label>
+                        </div>
+                    } else if (Model.tasks[i].state == 2) {
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-light active">
+                                <input type="radio" name="tasks[@i].state" value="1" autocomplete="off"> ○
+                            </label>
+                            <label class="btn btn-light">
+                                <input type="radio" name="tasks[@i].state" value="2" autocomplete="off" checked> ×
+                            </label>
+                        </div>
+                    }
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">No.@numno</div>
                     </div>
+                    <input class="form-control" type="text" name="tasks[@i].task" value=@Model.tasks[i].task readonly="readonly">
+                </div>
             </div>
             }
-        }
-    </div>
-    <div class="card-footer">
-        <a class="btn btn-primary" href="/Task/Index" role="button">戻る</a>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
+        </div>
+        <div class="card-footer">
+            <a class="btn btn-primary" href="/Task/Index" role="button">戻る</a>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    }
 </div>
